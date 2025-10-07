@@ -1,0 +1,29 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-inline: 1rem;
+}
+
+.label {
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+.input {
+    background-color: var(--text-color);
+    border-radius: 0.4rem;
+    padding: 0.4rem;
+    margin-top: 1rem;
+}
+
+.input::placeholder {
+    color: var(--secondary-color);
+    padding-left: 1rem;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.input:focus{
+    outline: 2px solid white;
+}
