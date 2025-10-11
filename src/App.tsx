@@ -1,9 +1,15 @@
 import styles from "./App.module.css"
+import {Routes, Route} from 'react-router-dom'
+import { Login } from "./pages/Login/Login"
+import { Register } from "./pages/Register/Register"
+import { Dashboard } from "./pages/Dashboard/Dashboard"
 
 export function App() {
   return(
-    <div className={styles.container}>
-      <h1 className={styles.title}>Olá, mundo!</h1>
-    </div>
+   <Routes>
+      <Route path="/" element={<Login/>} />
+      <Route path="/register" element={<Register/>} />
+      <Route path="/dashboard" element={<Dashboard/>} />
+   </Routes>
   )
 }

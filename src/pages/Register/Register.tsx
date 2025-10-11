@@ -1,33 +1,41 @@
 import React, { useState} from "react"
-import {useNavigate} from 'react-router-dom'
+import {useNavigate} from "react-router-dom"
 import { Button } from "../../components/Button"
 import { Input } from "../../components/Input"
 import formStyles from "../../styles/forms.module.css"
-import styles from "./login.module.css"
-import { login } from "../../services/authService"
-import {Link} from 'react-router-dom'
+import styles from "./register.module.css"
+import { register } from "../../services/authService"
 
-export function Login() {
+export function Register() {
     const navigate = useNavigate()
     const [email, setEmail] = useState('')
+    const [name, setName] = useState('')
     const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
     const [error, setError] = useState<string | null>(null)
 
     async function handleSubmit(event: React.FormEvent) {
         event.preventDefault()
         setError(null)
 
+        if(password !== confirmPassword) {
+            setError("As senha não coincidem. Por favor, verifique")
+            return
+        }
+
         try {
-            const data = await login(email, password)
 
-            const isConfirm = confirm(`Login bem sucedido! Olá ${data.user.name}`)
+            const data = await register(name, email, password)
 
-            if(isConfirm) {
-                navigate("/dashboard")
-            }
+            alert(`Cadastro bem-sucedido! Bem-vindo, ${data.name}. Agora faça o login`)
 
+            setName('')
             setEmail('')
             setPassword('')
+            setConfirmPassword('')
+
+            navigate("/")
+            
         } catch (error) {
             const errorMessage = (error as {message?: string}).message || "Erro desconhecido"
 
@@ -47,7 +55,7 @@ export function Login() {
 
                 <form className={formStyles.form} onSubmit={handleSubmit}>
                     <fieldset className={formStyles.field}>
-                        <legend className={formStyles.legend}>Login</legend>
+                        <legend className={formStyles.legend}>Cadastro</legend>
                         <Input 
                             label="Digite seu e-mail" 
                             type="email" 
@@ -56,6 +64,16 @@ export function Login() {
                             value={email}
                             onChange={(event)=>setEmail(event.target.value)}
                         />
+
+                        <Input
+                            label="Digite seu nome"
+                            type="text"
+                            placeholder="Digite seu nome aqui"
+                            required
+                            value={name}
+                            onChange={(event)=>setName(event.target.value)}
+                        />
+
                         <Input 
                             label="Digite sua senha" 
                             type="password" 
@@ -64,13 +82,21 @@ export function Login() {
                             value={password}
                             onChange={(event)=>setPassword(event.target.value)} 
                         />
+
+                        <Input 
+                            label="Confirme sua senha" 
+                            type="password" 
+                            placeholder="Confirme sua senha aqui"
+                            required   
+                            value={confirmPassword}
+                            onChange={(event)=>setConfirmPassword(event.target.value)} 
+                        />
+
                         <Button 
                             title="Entrar"    
                             type="submit"
                         />
                         </fieldset>
-
-                        <p>Ainda não tem conta? <Link to={"/register"} >Cadastre-se aqui</Link> </p>
                 </form>
             </div>
     )
