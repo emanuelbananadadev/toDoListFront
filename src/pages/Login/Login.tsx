@@ -71,6 +71,7 @@ export function Login() {
                         </fieldset>
 
                         <p>Ainda não tem conta? <Link to={"/register"} >Cadastre-se aqui</Link> </p>
+                       
                 </form>
             </div>
     )

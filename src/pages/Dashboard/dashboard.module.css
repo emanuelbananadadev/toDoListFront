@@ -1,3 +1,10 @@
-h1 {
+.title {
     background-color: red;
+}
+
+.changePassword {
+    background-color: var(--text-color);
+    text-align: center;
+    padding: .5rem;
+    cursor: pointer;
 }
