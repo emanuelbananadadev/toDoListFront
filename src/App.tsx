@@ -4,6 +4,7 @@ import { Login } from "./pages/Login/Login"
 import { Register } from "./pages/Register/Register"
 import { Dashboard } from "./pages/Dashboard/Dashboard"
 import { ChangePassword } from "./pages/Profile/ChangePassword"
+import { ForgotPassword } from "./pages/ForgotPassword/ForgotPassword"
 
 export function App() {
   return(
@@ -13,6 +14,7 @@ export function App() {
       <Route path="/register" element={<Register/>} />
       <Route path="/dashboard" element={<Dashboard/>} />
       <Route path="/profile/change-password" element={<ChangePassword/>}  />
+      <Route path="/forgot-password" element={<ForgotPassword/>} />
    </Routes>
   )
 }
