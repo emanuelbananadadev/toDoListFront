@@ -3,7 +3,10 @@ import { auth } from '../firebase/firebaseConfig'
 
 export async function sendResetEmail(email:string) {
     try {
-        await sendPasswordResetEmail(auth, email)
+        await sendPasswordResetEmail(auth, email, {
+            url: "http://localhost:5173/forgot-password",
+            handleCodeInApp: true
+        })
 
         return
     } catch (error) {
