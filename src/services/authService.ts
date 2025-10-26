@@ -49,3 +49,49 @@ export async function register(name: string, email: string, password: string) {
         throw new Error("Falha na comunicação com o servidor")
     }
 }
+
+export async function forgotPassword(email: string) {
+    try {
+        const response = await api.post('/auth/forgot-password', { email })
+
+        const { resetToken, message} = response.data
+
+        if(!resetToken) {
+            throw new Error(message || "Não foi possível iniciar a redefinição de senha")
+        }
+
+        return resetToken
+    } catch (error) {
+        if(axios.isAxiosError(error) && error.response) {
+            throw new Error(error.response.data.message || "Erro ao solicitar token")
+        }
+
+        throw new Error("Falha na comunicação com o servidor")
+    }
+}
+
+type ResetPasswordData = {
+    token: string
+    newPassword: string
+    confirmNewPassword: string
+}
+
+export async function changePasswordConfirm(data: ResetPasswordData) {
+    try {
+        await api.patch('/auth/reset-password-confirm', {
+            token: data.token,
+            newPassword: data.newPassword,
+            confirmNewPassword: data.confirmNewPassword
+        })
+
+        return 
+    } catch (error) {
+        if(axios.isAxiosError(error) && error.response) {
+            let errorMessage = "Falha na redefinição de senha"
+
+            throw new Error(errorMessage)
+        }
+
+        throw new Error("Falha na comunicação com o servidor")
+    }
+}

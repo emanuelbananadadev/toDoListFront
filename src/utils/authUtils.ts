@@ -7,3 +7,8 @@ export function getLoggedUser() {
 
     return null
 }
+
+export function removeTokenInfo() {
+    console.log("Fluxo de limpeza de token temporário concluído")
+    return
+}

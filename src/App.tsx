@@ -5,6 +5,7 @@ import { Register } from "./pages/Register/Register"
 import { Dashboard } from "./pages/Dashboard/Dashboard"
 import { ChangePassword } from "./pages/Profile/ChangePassword"
 import { ForgotPassword } from "./pages/ForgotPassword/ForgotPassword"
+import { ResetPasswordConfirm } from "./pages/ForgotPassword/ResetPasswordConfirm"
 
 export function App() {
   return(
@@ -15,6 +16,7 @@ export function App() {
       <Route path="/dashboard" element={<Dashboard/>} />
       <Route path="/profile/change-password" element={<ChangePassword/>}  />
       <Route path="/forgot-password" element={<ForgotPassword/>} />
+      <Route path="/reset-password-confirm" element={<ResetPasswordConfirm/>} />
    </Routes>
   )
 }
