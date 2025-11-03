@@ -95,3 +95,8 @@ export async function changePasswordConfirm(data: ResetPasswordData) {
         throw new Error("Falha na comunicação com o servidor")
     }
 }
+
+export function logout() {
+    localStorage.removeItem("authToken")
+    localStorage.removeItem("user")
+}
